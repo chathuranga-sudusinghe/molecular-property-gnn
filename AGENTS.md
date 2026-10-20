@@ -9,13 +9,15 @@ traditional cheminformatics / machine-learning baselines with Graph Neural Netwo
 possibly additional molecular properties.
 
 The owner has accepted the primary methodology described in
-[docs/primary_split.md](docs/primary_split.md) and authorized its CPU-based
-implementation with bounded synthetic checks. Real ESOL split execution, generated
-artifact acceptance, and procedural test sealing require separate explicit approval.
-Existing code and reports are observed implementation, not proof of owner acceptance
-or independent review. Do not access real datasets, engineer model features, build
-or train models, or run experiments without explicit approval for that scope and
-execution. GPU/CUDA handling belongs to a later model-training milestone.
+[docs/primary_split.md](docs/primary_split.md). Its CPU-based implementation and
+earlier explicitly authorized synthetic checks are historical work, not standing
+permission for future changes or execution. Future implementation and verification
+must follow Sections 4, 5, and 9.
+
+Real ESOL execution, generated-artifact acceptance, and procedural test sealing
+require separate explicit approval. Existing code and reports are observed
+implementation, not proof of independent review or owner acceptance. Model features,
+models, experiments, and GPU/CUDA handling remain separately approved milestones.
 
 Preserve the existing layout:
 
@@ -54,6 +56,20 @@ Use clear, concise English in explanations and polished professional English in
 project artifacts. End conversational responses with a brief Sinhala explanation
 unless the owner requests otherwise.
 
+Keep chat explanations useful and proportionate to the task. Explain the purpose,
+scope, important decisions, relevant risks, and next action with enough detail for
+the owner to decide. Do not impose an arbitrary four- or five-line limit, but avoid
+repeating information the owner can inspect directly.
+
+Do not paste complete files, lengthy replacement clauses, full patches, or entire
+GitHub issue descriptions into chat unless the owner explicitly requests them.
+For issue proposals, summarize the title, purpose, scope, affected files, acceptance
+criteria, exclusions, and dependencies; keep the complete description in the issue
+once creation is authorized. For file changes, summarize what changed and why,
+provide clickable file links, and use only small excerpts when needed.
+The owner can inspect full contents in VS Code or the file editor.
+This presentation preference does not waive scope, review, or approval requirements.
+
 ## 3. Independent review workflow
 
 Codex implementation → Claude independent review → ChatGPT independent review →
@@ -85,11 +101,15 @@ evidence for unchanged behavior, but distinguish historical checks from checks r
 
 ## 4. Approval and execution boundaries
 
-Approval must cover the specific operation or an explicitly bounded execution scope.
-Do not infer it from silence, README commands, general permission to code/review,
-or approval of a different task. Tool or sandbox permission is not owner authorization
-for research or Git operations. Reuse applicable explicit approvals without asking
-for the same authorization again.
+Approval must identify the specific operation or explicitly bounded command batch.
+Silence, documented commands, general coding/review permission, and approval of a
+different task do not authorize execution. Tool or sandbox approval is not owner
+authorization for research, verification, or Git operations.
+
+Reuse an explicit approval only within its unchanged, still-authorized scope.
+Permission for a completed or previously attempted model run does not authorize
+another run unless that repetition was explicitly included in the approved batch.
+Do not request the same approval again when it already covers the current operation.
 
 Explicit owner approval is required before:
 
@@ -106,22 +126,48 @@ Explicit owner approval is required before:
 - Molecular preprocessing or changes to research methodology, validation policy,
   dataset policy, licensing, or publication.
 
-Assistants may independently perform bounded read-only repository inspection, such
-as `git status`, `git diff`, `git log`, `git show`, `git branch --show-current`,
-`ls`, `find`, `rg`, `cat`, `head`, `tail`, and equivalent tools. Static checks may
-use existing installed tools in check-only mode without downloads or file changes.
+Assistants may independently perform bounded read-only repository inspection,
+including `git status`, `git diff`, `git log`, `git show`,
+`git branch --show-current`, `ls`, `find`, `rg`, `cat`, `head`, `tail`,
+and equivalent source/document inspection. Read-only inspection, review, planning,
+discussion, and proposals do not require a GitHub issue.
 
-Synthetic unit/integration tests may run independently only when computationally
-bounded, using tiny synthetic fixtures, no real datasets/models, no external data or
-weight downloads, and no network access. Keep fixture/output locations within
-owner-authorized filesystem boundaries. Do not use test execution as a route to
-real-data or real-model processing.
+This inspection permission does not authorize repository quality gates, even when
+they are check-only, static, bounded, or synthetic. Ruff, formatting checks, MyPy,
+pytest, unit/integration tests, package/import checks, CLI help/smoke checks, and
+other verification commands are owner-first under Section 9.
 
-Before requesting real-data/model execution approval, state:
+Codex may execute such checks only when the owner explicitly authorizes that
+specific execution or bounded verification batch. Implementation approval alone
+does not authorize verification. Synthetic checks must remain bounded and use no
+real datasets/models, downloads, or network access unless separately authorized.
+Keep all fixtures and outputs within owner-authorized filesystem boundaries.
 
-- Exact command and working directory.
-- Dataset/model involved, expected runtime, and compute/device.
-- Download impact, disk/output impact, and exact files or output locations written.
+AI tools must not independently execute real-model commands. This includes training,
+fine-tuning, model validation, validation-set scoring, model testing, test-set
+evaluation, inference on project data, benchmarking, cross-validation,
+hyperparameter tuning, calibration, ablations, repeated-seed experiments, and
+GPU/CUDA or cloud training/evaluation.
+
+Before requesting permission for any real-data/model execution, provide:
+
+1. Exact command.
+2. Working directory.
+3. Dataset revision and split used.
+4. Model and configuration used.
+5. Whether training, validation, or test data are involved.
+6. Expected CPU/GPU device and local/cloud environment.
+7. Expected runtime.
+8. Expected RAM/VRAM impact.
+9. Exact output files/artifacts, disk impact, and download impact.
+10. Whether the command can affect the procedural test seal.
+
+Mark genuinely inapplicable fields explicitly, such as model configuration for a
+data-only audit. Then ask for explicit owner permission and wait before execution.
+
+Test-set evaluation requires its own explicit authorization and must additionally
+satisfy the procedural test-seal policy. Real-data/model execution cannot be
+implicitly authorized by including it in a verification batch.
 
 Do not inspect or modify files outside the repository without owner permission.
 Do not upload molecular data, unpublished results, or project files to external
@@ -130,11 +176,29 @@ services without owner approval.
 ## 5. Git and GitHub governance
 
 - Never commit or push directly to `main`.
-- Meaningful work should be issue-scoped. Before requesting issue creation, propose
-  its title, scope, affected files, and acceptance criteria.
-- Use issue-specific branches only after owner approval. Do not invent issue IDs.
-  If the repository has no commits, request an approved bootstrap workflow before
-  any initial-commit or branch operation; do not bypass the `main` restriction.
+- Every repository mutation must be issue-scoped. There is no small-change or
+  quick-edit exception. This includes file creation/edit/update/deletion, features,
+  fixes, refactoring, documentation, configuration, tests, dependencies/environment
+  changes, methodology/data-processing/model/training/evaluation implementation,
+  CI/CD, notebooks, scripts, and other tracked changes or new files intended for
+  tracking.
+- Before creating an issue, present a useful summary of its proposed title,
+  purpose/background, exact scope, affected or expected files, acceptance criteria,
+  explicit exclusions, and dependencies. Ask for explicit owner approval and wait
+  before creation. Follow Section 2's presentation rules rather than reproducing
+  the entire issue body in chat.
+- After issue creation, use the actual issue number and provide the exact local
+  branch command before implementation. Branch names must follow
+  `<type>/issue-<number>-<short-topic>`. Never invent an issue number.
+- The owner creates/switches the branch unless that Git operation is separately
+  authorized to Codex.
+- Repository file mutations must not begin until the issue exists, its actual
+  number is known, the approved issue-specific branch is established, and the
+  owner has approved the implementation scope. General project permission does
+  not override these prerequisites.
+- Issue creation and branch establishment are prerequisite operations with their
+  own approval requirements; they do not authorize implementation or subsequent
+  Git operations.
 - Never use `git add .` or `git add -A`. Stage only explicit files relevant to the
   active issue, and only after owner approval.
 - Do not mix unrelated changes in an issue, branch, or commit. Preserve unrelated
@@ -253,10 +317,57 @@ for their definitions. Do not duplicate full policies or create new decision-log
 experiment-template, or artifact-retention files without approved scope. Those
 organizational additions remain **PROPOSED**, optional future work.
 
-After meaningful implementation work, report scope, changed files, actual behavior,
-checks run/results, checks not run, limitations, branch/state, and uncommitted changes.
-Give the best next engineering step and identify Git actions still requiring owner
-approval. Suggest targeted staging/commit commands and a professional commit message
-only when appropriate; never execute them without approval. Recommend a pull request
-only when repository state and approved workflow justify it, with base/head, title,
-description, and testing details. Never imply an unperformed check passed.
+### Owner-first verification
+
+After every implementation/edit/update task, provide one complete ordered terminal
+verification batch for the owner to run. Do not automatically execute quality gates
+unless the owner has explicitly authorized that specific execution.
+
+Include every applicable project-configured check. Where applicable, order them as:
+targeted unit tests, targeted integration tests, full synthetic pytest suite, Ruff
+lint, Ruff formatting check, MyPy, then package/import/CLI/static checks. Explain
+omissions or unavailable tools; do not install tools merely to complete this list.
+
+For every command, state its working directory, purpose, expected behavior,
+whether it writes files, whether it uses synthetic or real data, whether it uses a
+real model, and when to stop on failure. Include caches or generated files when
+describing writes. Tell the owner to stop at the first failure or unexpected result
+and return the output.
+
+Do not split a known verification sequence into repeated one-command handoffs.
+The owner runs the batch and returns outputs unless execution was explicitly
+delegated to Codex. Inspect the actual authorized outputs before claiming tests,
+Ruff, MyPy, integration checks, or other verification passed. Distinguish historical
+evidence from checks rerun for the current change.
+
+Commands involving real data/models, train/validation/test partitions, GPU execution,
+or cloud resources remain subject to Section 4. Listing them does not authorize them.
+
+### Implementation handoff
+
+After every completed implementation, report the following in a concise, useful
+handoff. Group related items rather than presenting an unnecessarily long template,
+and follow Section 2's presentation rules:
+
+1. GitHub issue number and title.
+2. Current issue-specific branch.
+3. Files created.
+4. Files modified.
+5. Files deleted, or none.
+6. Implementation summary.
+7. Deviations from the approved issue scope, or none.
+8. Checks Codex actually ran under explicit authorization and their results.
+9. Checks pending owner execution.
+10. The complete ordered terminal verification batch.
+11. Current `git status --short --branch`.
+12. Recommended explicit issue-scoped staging commands.
+13. Recommended commit message containing the issue number.
+14. Recommended push command for the issue branch.
+15. The best next engineering step.
+
+Mark non-applicable items explicitly. Never use `git add .` or `git add -A`.
+Suggested commands do not authorize staging, commits, pushes, PRs, merges, or any
+other Git mutation.
+
+Recommend a PR only when appropriate, with base, head, title, description, and
+testing details. Creation or merging still requires separate owner authorization.
