@@ -1,9 +1,6 @@
-# molecular-property-gnn
+# Evaluating Graph Neural Networks for Structure-Aware Aqueous Solubility Prediction Under Molecular Distribution Shift
 
 ## Project overview
-
-**Research title:** Evaluating Graph Neural Networks for Structure-Aware Aqueous
-Solubility Prediction Under Molecular Distribution Shift
 
 `molecular-property-gnn` is a research project investigating aqueous solubility
 prediction, beginning with the Delaney ESOL dataset. Its objective is to compare
