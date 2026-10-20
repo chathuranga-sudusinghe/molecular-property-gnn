@@ -8,10 +8,14 @@ traditional cheminformatics / machine-learning baselines with Graph Neural Netwo
 (GNNs), then investigate scaffold generalization, explainability, uncertainty, and
 possibly additional molecular properties.
 
-The currently authorized milestone is dataset validation and an initial data audit.
+The owner has accepted the primary methodology described in
+[docs/primary_split.md](docs/primary_split.md) and authorized its CPU-based
+implementation with bounded synthetic checks. Real ESOL split execution, generated
+artifact acceptance, and procedural test sealing require separate explicit approval.
 Existing code and reports are observed implementation, not proof of owner acceptance
-or independent review. Do not create splits, engineer features, build or train models,
-or run experiments without explicit owner approval for that scope and execution.
+or independent review. Do not access real datasets, engineer model features, build
+or train models, or run experiments without explicit approval for that scope and
+execution. GPU/CUDA handling belongs to a later model-training milestone.
 
 Preserve the existing layout:
 

@@ -4,9 +4,10 @@ Research foundation for aqueous solubility prediction. The eventual goal is to c
 traditional molecular-descriptor machine learning with graph neural networks (GNNs),
 then investigate scaffold-based evaluation, explainability, and uncertainty estimation.
 
-The implementation covers dataset validation, an initial data audit, and
-label-blind structural diagnostics. Diagnostics create evidence only;
-no sample split, model features, or models are implemented.
+The implementation covers **dataset validation, structural diagnostics, and the approved
+CPU-based hybrid split generator**. The split generator is checked using synthetic
+fixtures; real ESOL split generation and artifact acceptance require separate approval.
+No real split, model features, or models have been created by this milestone.
 
 ## Setup and use
 
@@ -42,3 +43,17 @@ provenance, validation rules, initial findings, and limitations. A local
 machine-readable audit snapshot is retained at `docs/esol_audit.json`, with
 the input checksum and runtime versions. It is excluded from Git pending
 separate publication approval.
+
+## Primary structural split
+
+See [the accepted primary split contract](docs/primary_split.md) for identity rules,
+typed Murcko groups, acyclic similarity-connected components, the deterministic
+allocator, artifact schemas, and the procedural test seal.
+
+The generator uses fixed Morgan radius-2 sparse count fingerprints and the
+project-specific inclusive Tanimoto threshold 0.70. It does not use targets or
+historical predictions. It writes an unsealed candidate requiring owner acceptance.
+
+The documented ESOL command requires separate real-data execution approval; do not
+run it as part of synthetic implementation checks. GPU/CUDA handling is reserved for
+a later model-training milestone. Existing audit evidence remains unchanged.
