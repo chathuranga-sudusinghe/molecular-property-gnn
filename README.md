@@ -4,8 +4,9 @@ Research foundation for aqueous solubility prediction. The eventual goal is to c
 traditional molecular-descriptor machine learning with graph neural networks (GNNs),
 then investigate scaffold-based evaluation, explainability, and uncertainty estimation.
 
-The current implementation covers dataset validation and an initial data audit.
-No dataset splits, model features, or models are implemented.
+The implementation covers dataset validation, an initial data audit, and
+label-blind structural diagnostics. Diagnostics create evidence only;
+no sample split, model features, or models are implemented.
 
 ## Setup and use
 
